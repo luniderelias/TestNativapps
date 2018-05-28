@@ -64,7 +64,8 @@
                 android:id="@+id/organizationSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/fab_margin"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -77,7 +78,8 @@
                 android:id="@+id/personSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_marginBottom="@dimen/fab_margin"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -103,7 +105,8 @@
                 android:id="@+id/dueDateEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:inputType="date"/>
 
             <TextView
                 android:layout_width="match_parent"

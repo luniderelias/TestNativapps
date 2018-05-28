@@ -2,11 +2,13 @@ package nativapps.teste.micrm.view;
 
 
 import android.support.v4.app.Fragment;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.j256.ormlite.dao.Dao;
 
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
@@ -40,6 +42,10 @@ public class PeopleFragment extends Fragment {
     @OrmLiteDao(helper = DatabaseHelper.class)
     Dao<Person, Integer> personDao;
 
+    @AfterViews
+    void afterViews() {
+
+    }
 
     @Click(R.id.addButton)
     void addClick() {
