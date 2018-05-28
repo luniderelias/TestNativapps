@@ -124,7 +124,7 @@ public class BusinessFragment extends Fragment {
                     stateEditText.getText().toString(),
                     institutionDao.queryForAll().get(organizationSpinner.getSelectedItemPosition()),
                     personDao.queryForAll().get(personSpinner.getSelectedItemPosition())));
-            showToast(getResources().getString(R.string.saved));
+            showToast(getResources().getString(R.string.business_saved));
         } catch (SQLException e) {
             e.printStackTrace();
             showToast(getResources().getString(R.string.save_failed));

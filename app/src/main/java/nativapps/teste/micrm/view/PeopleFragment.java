@@ -60,7 +60,7 @@ public class PeopleFragment extends Fragment {
                     phoneEditText.getText().toString(),
                     mailEditText.getText().toString()
             ));
-            showToast(getResources().getString(R.string.saved));
+            showToast(getResources().getString(R.string.person_saved));
         } catch (SQLException e) {
             e.printStackTrace();
             showToast(getResources().getString(R.string.save_failed));

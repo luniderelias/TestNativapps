@@ -137,7 +137,7 @@ public class ActivitiesFragment extends Fragment {
                     businessDao.queryForAll().get(businessSpinner.getSelectedItemPosition()),
                     dateEditText.getText().toString(),
                     timeEditText.getText().toString()));
-            showToast(getResources().getString(R.string.saved));
+            showToast(getResources().getString(R.string.activity_saved));
         } catch (SQLException e) {
             e.printStackTrace();
             showToast(getResources().getString(R.string.save_failed));

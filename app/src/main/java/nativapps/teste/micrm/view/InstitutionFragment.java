@@ -59,7 +59,7 @@ public class InstitutionFragment extends Fragment {
                     addressEditText.getText().toString(),
                     phoneEditText.getText().toString()
             ));
-            showToast(getResources().getString(R.string.saved));
+            showToast(getResources().getString(R.string.organization_saved));
         } catch (SQLException e) {
             e.printStackTrace();
             showToast(getResources().getString(R.string.save_failed));
