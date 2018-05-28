@@ -1,3 +1,112 @@
 #
-# generated on 2018/05/27 01:55:39
+# generated on 2018/05/27 11:02:07
 #
+# --table-start--
+dataClass=nativapps.teste.micrm.model.Activity
+tableName=activity
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=description
+# --field-end--
+# --field-start--
+fieldName=type
+# --field-end--
+# --field-start--
+fieldName=institution
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=person
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=business
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=date
+# --field-end--
+# --field-start--
+fieldName=time
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=nativapps.teste.micrm.model.Business
+tableName=business
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=title
+# --field-end--
+# --field-start--
+fieldName=description
+# --field-end--
+# --field-start--
+fieldName=value
+# --field-end--
+# --field-start--
+fieldName=dueDate
+# --field-end--
+# --field-start--
+fieldName=state
+# --field-end--
+# --field-start--
+fieldName=business
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=person
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=nativapps.teste.micrm.model.Institution
+tableName=institution
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=address
+# --field-end--
+# --field-start--
+fieldName=phone
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=nativapps.teste.micrm.model.Person
+tableName=person
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=phone
+# --field-end--
+# --field-start--
+fieldName=mail
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
