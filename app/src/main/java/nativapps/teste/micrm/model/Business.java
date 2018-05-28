@@ -24,7 +24,7 @@ public class Business {
     String state;
 
     @DatabaseField(foreign = true)
-    Institution business;
+    Institution institution;
 
     @DatabaseField(foreign = true)
     Person person;
@@ -32,13 +32,13 @@ public class Business {
     public Business() {
     }
 
-    public Business(String title, String description, String value, String dueDate, String state, Institution business, Person person) {
+    public Business(String title, String description, String value, String dueDate, String state, Institution institution, Person person) {
         this.title = title;
         this.description = description;
         this.value = value;
         this.dueDate = dueDate;
         this.state = state;
-        this.business = business;
+        this.institution = institution;
         this.person = person;
     }
 
@@ -90,12 +90,12 @@ public class Business {
         this.state = state;
     }
 
-    public Institution getBusiness() {
-        return business;
+    public Institution getInstitution() {
+        return institution;
     }
 
-    public void setBusiness(Institution business) {
-        this.business = business;
+    public void setInstitution(Institution institution) {
+        this.institution = institution;
     }
 
     public Person getPerson() {
