@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import nativapps.teste.micrm.R;
 
@@ -48,6 +49,10 @@ public class ActivityUtil {
                     }
                 });
         builder.create();
+    }
+
+    public static void showToast(Context context, String message){
+        Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
     }
 
     public static ProgressDialog callProgressDialog(Context context, String title, String message) {

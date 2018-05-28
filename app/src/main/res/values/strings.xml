@@ -31,4 +31,7 @@
 
     <string name="type">Type</string>
     <string name="add">ADD</string>
+
+    <string name="saved">Saved</string>
+    <string name="save_failed">Save Failed</string>
 </resources>
