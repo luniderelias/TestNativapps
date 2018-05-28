@@ -71,13 +71,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private void populateBusiness() {
         RuntimeExceptionDao<Business, Integer> dao = getRuntimeExceptionDao(Business.class);
-        businessList.add(new Business("1", "1", "01/01/2018", "1", "1",
+        businessList.add(new Business("Title 1", "Description 1", "Value 1", "01/01/2018", "State 1",
                 institutionList.get(0),
                 personList.get(0)));
-        businessList.add(new Business("2", "2", "01/01/2018", "1", "1",
+        businessList.add(new Business("Title 2", "Description 2", "Value 2", "01/01/2018", "State 2",
                 institutionList.get(0),
                 personList.get(0)));
-        businessList.add(new Business("3", "3", "01/01/2018", "1", "1",
+        businessList.add(new Business("Title 3", "Description 3", "Value 3", "01/01/2018", "State 3",
                 institutionList.get(0),
                 personList.get(0)));
         dao.create(businessList);
@@ -85,21 +85,21 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     private void populateActivity() {
         RuntimeExceptionDao<Activity, Integer> dao = getRuntimeExceptionDao(Activity.class);
-        activityList.add(new Activity("1", "1",
+        activityList.add(new Activity("Description 1", "Type 1",
                 institutionList.get(0),
                 personList.get(0),
                 businessList.get(0),
-                "01/01/20180", "10:00"));
-        activityList.add(new Activity("2", "2",
+                "01/01/2018", "10:00"));
+        activityList.add(new Activity("Description 2", "Type 2",
                 institutionList.get(0),
                 personList.get(0),
                 businessList.get(0),
-                "01/01/20180", "10:00"));
-        activityList.add(new Activity("3", "3",
+                "01/01/2018", "10:00"));
+        activityList.add(new Activity("Description 3", "Type 3",
                 institutionList.get(0),
                 personList.get(0),
                 businessList.get(0),
-                "01/01/20180", "10:00"));
+                "01/01/2018", "10:00"));
         dao.create(activityList);
     }
 
