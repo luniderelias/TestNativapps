@@ -35,6 +35,4 @@
     <string name="organization_saved">Organización guardada con éxito</string>
 
     <string name="save_failed">Error al Guardar</string>
-    <string name="navigation_drawer_open">Open Navigation Drawer</string>
-    <string name="navigation_drawer_close">Close Navigation Drawer</string>
 </resources>
