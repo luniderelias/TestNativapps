@@ -10,6 +10,7 @@ import com.j256.ormlite.dao.Dao;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -20,9 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nativapps.teste.micrm.R;
+import nativapps.teste.micrm.model.Activity;
 import nativapps.teste.micrm.model.Business;
 import nativapps.teste.micrm.model.Institution;
 import nativapps.teste.micrm.model.Person;
+import nativapps.teste.micrm.util.ActivityUtil;
 import nativapps.teste.micrm.util.DatabaseHelper;
 
 @EFragment(R.layout.fragment_activities)
@@ -60,6 +63,9 @@ public class ActivitiesFragment extends Fragment {
 
     @OrmLiteDao(helper = DatabaseHelper.class)
     Dao<Business, Integer> businessDao;
+
+    @OrmLiteDao(helper = DatabaseHelper.class)
+    Dao<Activity, Integer> activityDao;
 
     List<String> institutes = new ArrayList<>();
     List<String> people = new ArrayList<>();
@@ -113,6 +119,34 @@ public class ActivitiesFragment extends Fragment {
 
         businessSpinner.setAdapter(businessAdapter);
         businessSpinner.setSelection(0);
+    }
+
+    @Click(R.id.addButton)
+    void addClick(){
+        addItem();
+    }
+
+    @Background
+    void addItem(){
+        try {
+            activityDao.createOrUpdate(new Activity(
+                    descriptionEditText.getText().toString(),
+                    typeEditText.getText().toString(),
+                    institutionDao.queryForAll().get(organizationSpinner.getSelectedItemPosition()),
+                    personDao.queryForAll().get(personSpinner.getSelectedItemPosition()),
+                    businessDao.queryForAll().get(businessSpinner.getSelectedItemPosition()),
+                    dateEditText.getText().toString(),
+                    timeEditText.getText().toString()));
+            showToast(getResources().getString(R.string.activity_saved));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showToast(getResources().getString(R.string.save_failed));
+        }
+    }
+
+    @UiThread
+    void showToast(String saved){
+        ActivityUtil.showToast(getActivity(),saved);
     }
 
 

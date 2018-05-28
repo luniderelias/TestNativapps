@@ -8,4 +8,4 @@
     android:textColor="@color/white"
     android:textSize="@dimen/text_size"
     android:ellipsize="marquee"
-    android:background="@color/colorPrimaryLight"/>
+    android:background="@color/colorPrimaryDark"/>

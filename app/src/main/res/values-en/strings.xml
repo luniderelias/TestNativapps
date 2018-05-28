@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">MiCRM</string>
+
+    <string name="home">Home</string>
+    <string name="activities">Activities</string>
+    <string name="people">People</string>
+    <string name="business">Business</string>
+    <string name="institution">Organization</string>
+    <string name="ok">Confirm</string>
+
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="mail">Email</string>
+
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="organization">Organization</string>
+    <string name="person">Person</string>
+    <string name="value">Value</string>
+    <string name="due_date">Due Date</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="state">State</string>
+
+    <string name="type">Type</string>
+    <string name="add_business">Add Business</string>
+    <string name="add_activity">Add Activity</string>
+    <string name="add_person">Add Person</string>
+    <string name="add_organization">Add Organization</string>
+
+    <string name="activity_saved">Activity saved successfully</string>
+    <string name="business_saved">Business saved successfully</string>
+    <string name="person_saved">Person saved successfully</string>
+    <string name="organization_saved">Organization saved successfully</string>
+
+    <string name="save_failed">Save failed</string>
+</resources>

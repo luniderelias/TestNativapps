@@ -11,6 +11,7 @@ import com.j256.ormlite.dao.Dao;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
@@ -21,8 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nativapps.teste.micrm.R;
+import nativapps.teste.micrm.model.Activity;
+import nativapps.teste.micrm.model.Business;
 import nativapps.teste.micrm.model.Institution;
 import nativapps.teste.micrm.model.Person;
+import nativapps.teste.micrm.util.ActivityUtil;
 import nativapps.teste.micrm.util.DatabaseHelper;
 
 @EFragment(R.layout.fragment_business)
@@ -31,8 +35,8 @@ public class BusinessFragment extends Fragment {
     @ViewById(R.id.titleEditText)
     EditText titleEditText;
 
-    @ViewById(R.id.addressEditText)
-    EditText addressEditText;
+    @ViewById(R.id.descriptionEditText)
+    EditText descriptionEditText;
 
     @ViewById(R.id.organizationSpinner)
     Spinner organizationSpinner;
@@ -57,6 +61,9 @@ public class BusinessFragment extends Fragment {
 
     @OrmLiteDao(helper = DatabaseHelper.class)
     Dao<Person, Integer> personDao;
+
+    @OrmLiteDao(helper = DatabaseHelper.class)
+    Dao<Business, Integer> businessDao;
 
     List<String> institutes = new ArrayList<>();
     List<String> people = new ArrayList<>();
@@ -98,5 +105,34 @@ public class BusinessFragment extends Fragment {
         organizationSpinner.setSelection(0);
         personSpinner.setAdapter(peopleAdapter);
         personSpinner.setSelection(0);
+    }
+
+
+    @Click(R.id.addButton)
+    void addClick(){
+        addItem();
+    }
+
+    @Background
+    void addItem(){
+        try {
+            businessDao.createOrUpdate(new Business(
+                    titleEditText.getText().toString(),
+                    descriptionEditText.getText().toString(),
+                    valueEditText.getText().toString(),
+                    dueDateEditText.getText().toString(),
+                    stateEditText.getText().toString(),
+                    institutionDao.queryForAll().get(organizationSpinner.getSelectedItemPosition()),
+                    personDao.queryForAll().get(personSpinner.getSelectedItemPosition())));
+            showToast(getResources().getString(R.string.business_saved));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showToast(getResources().getString(R.string.save_failed));
+        }
+    }
+
+    @UiThread
+    void showToast(String saved){
+        ActivityUtil.showToast(getActivity(),saved);
     }
 }
