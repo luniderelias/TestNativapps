@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import net.rimoto.intlphoneinput.IntlPhoneInput;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -76,9 +78,18 @@ public class ValidateUtil {
                 return false;
             }
         } catch (Exception e) {
+            setError(editText, errorMessage);
             e.printStackTrace();
             return false;
         }
+    }
+
+    public static boolean checkPhone(IntlPhoneInput phoneInputView) {
+        if (!phoneInputView.isValid()) {
+            phoneInputView.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     private static void setError(EditText editText, String errorMessage) {

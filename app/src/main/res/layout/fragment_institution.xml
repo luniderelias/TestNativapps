@@ -64,14 +64,12 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/title_size" />
 
-            <EditText
+            <net.rimoto.intlphoneinput.IntlPhoneInput
                 android:id="@+id/phoneEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:inputType="phone"
-                android:singleLine="true"
-                android:nextFocusDown="@id/addButton"/>
+                app:textColor="@color/white"
+                android:nextFocusDown="@id/addButton" />
 
         </LinearLayout>
     </ScrollView>

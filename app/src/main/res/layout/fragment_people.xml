@@ -40,22 +40,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:singleLine="true"
-                android:nextFocusDown="@id/phoneEditText"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/phone"
-                android:textColor="@color/white"
-                android:textSize="@dimen/title_size" />
-
-            <EditText
-                android:id="@+id/phoneEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:inputType="phone"
-                android:singleLine="true"
                 android:nextFocusDown="@id/mailEditText"/>
 
             <TextView
@@ -72,7 +56,21 @@
                 android:textColor="@color/white"
                 android:inputType="textEmailAddress"
                 android:singleLine="true"
-                android:nextFocusDown="@id/addButton"/>
+                android:nextFocusDown="@id/phoneEditText"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/phone"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_size" />
+
+            <net.rimoto.intlphoneinput.IntlPhoneInput
+                android:id="@+id/phoneEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:textColor="@color/white"
+                android:nextFocusDown="@id/addButton" />
 
         </LinearLayout>
     </ScrollView>

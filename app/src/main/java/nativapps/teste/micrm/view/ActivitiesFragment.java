@@ -89,7 +89,6 @@ public class ActivitiesFragment extends Fragment {
         getSpinnersData();
         dateEditText.addTextChangedListener(new MaskWatcher("##/##/####"));
         timeEditText.addTextChangedListener(new MaskWatcher("##:##"));
-
     }
 
     @Background
@@ -109,14 +108,17 @@ public class ActivitiesFragment extends Fragment {
     }
 
     private void initAdapters() {
+        institutes.add(0, getResources().getString(R.string.inform));
         organizationAdapter = new ArrayAdapter<>(
                 getActivity(), R.layout.spinner_item, institutes);
         organizationAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 
+        people.add(0, getResources().getString(R.string.inform));
         peopleAdapter = new ArrayAdapter<>(
                 getActivity(), R.layout.spinner_item, people);
         peopleAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 
+        businesses.add(0, getResources().getString(R.string.inform));
         businessAdapter = new ArrayAdapter<>(
                 getActivity(), R.layout.spinner_item, businesses);
         businessAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
@@ -136,8 +138,11 @@ public class ActivitiesFragment extends Fragment {
 
     @Click(R.id.addButton)
     void addClick() {
-        if (validateFields())
-            showSureDialog();
+        if (validateFields()) {
+            if (checkSpinners())
+                showSureDialog();
+        } else
+            showToast(getResources().getString(R.string.save_failed));
     }
 
     private Boolean validateFields() {
@@ -147,6 +152,27 @@ public class ActivitiesFragment extends Fragment {
                 getResources().getString(R.string.invalid_time)) &&
                 ValidateUtil.isValidDate(dateEditText,
                         getResources().getString(R.string.invalid_date));
+    }
+
+    private Boolean checkSpinners() {
+        if (organizationSpinner.getSelectedItemPosition() == 0) {
+            showToast(getResources().getString(R.string.inform) +
+                    " " + getResources().getString(R.string.organization));
+            return false;
+        } else {
+            if (personSpinner.getSelectedItemPosition() == 0) {
+                showToast(getResources().getString(R.string.inform) +
+                        " " + getResources().getString(R.string.people));
+                return false;
+            } else {
+                if (businessSpinner.getSelectedItemPosition() == 0) {
+                    showToast(getResources().getString(R.string.inform) +
+                            " " + getResources().getString(R.string.business));
+                    return false;
+                } else
+                    return true;
+            }
+        }
     }
 
     private void showSureDialog() {
@@ -171,9 +197,9 @@ public class ActivitiesFragment extends Fragment {
             activityDao.createOrUpdate(new Activity(
                     descriptionEditText.getText().toString(),
                     typeEditText.getText().toString(),
-                    institutionDao.queryForAll().get(organizationSpinner.getSelectedItemPosition()),
-                    personDao.queryForAll().get(personSpinner.getSelectedItemPosition()),
-                    businessDao.queryForAll().get(businessSpinner.getSelectedItemPosition()),
+                    institutionDao.queryForAll().get(organizationSpinner.getSelectedItemPosition()-1),
+                    personDao.queryForAll().get(personSpinner.getSelectedItemPosition()-1),
+                    businessDao.queryForAll().get(businessSpinner.getSelectedItemPosition()-1),
                     dateEditText.getText().toString(),
                     timeEditText.getText().toString()));
             showToast(getResources().getString(R.string.activity_saved));
