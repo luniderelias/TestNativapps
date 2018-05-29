@@ -104,10 +104,12 @@ public class BusinessFragment extends Fragment {
     }
 
     private void initAdapters() {
+        institutes.add(0, getResources().getString(R.string.inform));
         organizationAdapter = new ArrayAdapter<>(
                 getActivity(), R.layout.spinner_item, institutes);
         organizationAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
 
+        people.add(0, getResources().getString(R.string.inform));
         peopleAdapter = new ArrayAdapter<>(
                 getActivity(), R.layout.spinner_item, people);
         peopleAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
@@ -117,6 +119,7 @@ public class BusinessFragment extends Fragment {
     void setSpinnersData() {
         organizationSpinner.setAdapter(organizationAdapter);
         organizationSpinner.setSelection(0);
+
         personSpinner.setAdapter(peopleAdapter);
         personSpinner.setSelection(0);
     }
@@ -124,9 +127,10 @@ public class BusinessFragment extends Fragment {
 
     @Click(R.id.addButton)
     void addClick() {
-        if (validateFields())
-            showSureDialog();
-        else
+        if (validateFields()) {
+            if (checkSpinners())
+                showSureDialog();
+        } else
             showToast(getResources().getString(R.string.save_failed));
     }
 
@@ -139,6 +143,22 @@ public class BusinessFragment extends Fragment {
                 &&
                 ValidateUtil.isValidDate(dueDateEditText,
                         getResources().getString(R.string.invalid_date));
+    }
+
+    private Boolean checkSpinners() {
+        if (organizationSpinner.getSelectedItemPosition() == 0) {
+            showToast(getResources().getString(R.string.inform) +
+                    " " + getResources().getString(R.string.organization));
+            return false;
+        } else {
+            if (personSpinner.getSelectedItemPosition() == 0) {
+                showToast(getResources().getString(R.string.inform) +
+                        " " + getResources().getString(R.string.people));
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 
     private void showSureDialog() {
@@ -166,8 +186,8 @@ public class BusinessFragment extends Fragment {
                     valueEditText.getText().toString(),
                     dueDateEditText.getText().toString(),
                     stateEditText.getText().toString(),
-                    institutionDao.queryForAll().get(organizationSpinner.getSelectedItemPosition()),
-                    personDao.queryForAll().get(personSpinner.getSelectedItemPosition())));
+                    institutionDao.queryForAll().get(organizationSpinner.getSelectedItemPosition()-1),
+                    personDao.queryForAll().get(personSpinner.getSelectedItemPosition()-1)));
             showToast(getResources().getString(R.string.business_saved));
             switchFragment();
         } catch (SQLException e) {

@@ -45,4 +45,5 @@
 
     <string name="save_failed">Erro ao Salvar</string>
     <string name="invalid_phone">Telefone Inválido</string>
+    <string name="inform">Informar</string>
 </resources>
