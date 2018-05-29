@@ -35,5 +35,13 @@
     <string name="person_saved">Pessoa salva com sucesso</string>
     <string name="organization_saved">Organização salva com sucesso</string>
 
+    <string name="cancel">Cancelar</string>
+    <string name="field_not_null">O campo não pode estar vazio</string>
+    <string name="invalid_email">Email Inválido</string>
+    <string name="invalid_time">Tempo Inválido</string>
+    <string name="invalid_date">Data Inválida</string>
+    <string name="want_to_create">Deseja adicionar um item?</string>
+    <string name="are_you_sure">Tem certeza de que deseja realizar esta ação?</string>
+
     <string name="save_failed">Erro ao Salvar</string>
 </resources>

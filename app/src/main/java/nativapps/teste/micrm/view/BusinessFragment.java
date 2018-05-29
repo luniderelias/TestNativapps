@@ -1,7 +1,13 @@
 package nativapps.teste.micrm.view;
 
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.Paint;
+import android.os.Build;
 import android.support.v4.app.Fragment;
+import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +19,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.ormlite.annotations.OrmLiteDao;
@@ -28,6 +35,8 @@ import nativapps.teste.micrm.model.Institution;
 import nativapps.teste.micrm.model.Person;
 import nativapps.teste.micrm.util.ActivityUtil;
 import nativapps.teste.micrm.util.DatabaseHelper;
+import nativapps.teste.micrm.util.MaskWatcher;
+import nativapps.teste.micrm.util.ValidateUtil;
 
 @EFragment(R.layout.fragment_business)
 public class BusinessFragment extends Fragment {
@@ -72,7 +81,12 @@ public class BusinessFragment extends Fragment {
 
     @AfterViews
     void afterViews() {
+        ((MainActivity_) getActivity())
+                .navigationView.setCheckedItem(R.id.nav_business);
+        ((MainActivity_) getActivity())
+                .toolbar.setTitle(getResources().getString(R.string.add_business));
         getSpinnersData();
+        dueDateEditText.addTextChangedListener(new MaskWatcher("##/##/####"));
     }
 
     @Background
@@ -89,7 +103,7 @@ public class BusinessFragment extends Fragment {
         }
     }
 
-    private void initAdapters(){
+    private void initAdapters() {
         organizationAdapter = new ArrayAdapter<>(
                 getActivity(), R.layout.spinner_item, institutes);
         organizationAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
@@ -100,7 +114,7 @@ public class BusinessFragment extends Fragment {
     }
 
     @UiThread
-    void setSpinnersData(){
+    void setSpinnersData() {
         organizationSpinner.setAdapter(organizationAdapter);
         organizationSpinner.setSelection(0);
         personSpinner.setAdapter(peopleAdapter);
@@ -109,12 +123,40 @@ public class BusinessFragment extends Fragment {
 
 
     @Click(R.id.addButton)
-    void addClick(){
-        addItem();
+    void addClick() {
+        if (validateFields())
+            showSureDialog();
+    }
+
+    private Boolean validateFields() {
+        return ValidateUtil.isNotNullEditText(titleEditText,
+                getResources().getString(R.string.field_not_null))
+                &&
+                ValidateUtil.isNotNullEditText(dueDateEditText,
+                        getResources().getString(R.string.field_not_null))
+                &&
+                ValidateUtil.isValidDate(dueDateEditText,
+                        getResources().getString(R.string.invalid_date));
+    }
+
+    private void showSureDialog() {
+        AlertDialog.Builder builder = ActivityUtil.callDialog(
+                getActivity(), R.string.add_business, R.string.are_you_sure);
+
+        builder.setPositiveButton(getResources().getString(R.string.ok),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        addItem();
+                    }
+                }).setNegativeButton(getResources().getString(R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).show();
     }
 
     @Background
-    void addItem(){
+    void addItem() {
         try {
             businessDao.createOrUpdate(new Business(
                     titleEditText.getText().toString(),
@@ -125,14 +167,44 @@ public class BusinessFragment extends Fragment {
                     institutionDao.queryForAll().get(organizationSpinner.getSelectedItemPosition()),
                     personDao.queryForAll().get(personSpinner.getSelectedItemPosition())));
             showToast(getResources().getString(R.string.business_saved));
+            switchFragment();
         } catch (SQLException e) {
             e.printStackTrace();
             showToast(getResources().getString(R.string.save_failed));
         }
     }
 
+    @Click(R.id.addOrganizationImageView)
+    void checkOrganizationSpinner() {
+        ActivityUtil.callDialog(getActivity(), R.string.add_organization, R.string.want_to_create)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ((MainActivity_) getActivity()).switchFragment("InstitutionFragment");
+                    }
+                }).show();
+    }
+
+    @Click(R.id.addPeopleImageView)
+    void checkPersonSpinner() {
+        ActivityUtil.callDialog(getActivity(), R.string.add_person, R.string.want_to_create)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ((MainActivity_) getActivity()).switchFragment("PeopleFragment");
+                    }
+                }).show();
+    }
+
+
     @UiThread
-    void showToast(String saved){
-        ActivityUtil.showToast(getActivity(),saved);
+    void switchFragment() {
+        ActivityUtil.switchFragment(new HomeFragment_(),
+                R.id.home_container, ((MainActivity_) getActivity()));
+    }
+
+    @UiThread
+    void showToast(String saved) {
+        ActivityUtil.showToast(getActivity(), saved);
     }
 }
