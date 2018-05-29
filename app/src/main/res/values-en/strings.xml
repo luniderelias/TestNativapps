@@ -35,6 +35,8 @@
     <string name="organization_saved">Organization saved successfully</string>
 
     <string name="cancel">Cancel</string>
+    <string name="field_not_null">Field cannot be empty</string>
+    <string name="invalid_email">Invalid Email</string>
     <string name="are_you_sure">Are you sure about performing this action?</string>
 
     <string name="save_failed">Save failed</string>

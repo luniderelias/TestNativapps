@@ -33,6 +33,7 @@ import nativapps.teste.micrm.model.Institution;
 import nativapps.teste.micrm.model.Person;
 import nativapps.teste.micrm.util.ActivityUtil;
 import nativapps.teste.micrm.util.DatabaseHelper;
+import nativapps.teste.micrm.util.ValidateUtil;
 
 @EFragment(R.layout.fragment_business)
 public class BusinessFragment extends Fragment {
@@ -115,7 +116,16 @@ public class BusinessFragment extends Fragment {
 
     @Click(R.id.addButton)
     void addClick() {
-        showSureDialog();
+        if (validateFields())
+            showSureDialog();
+    }
+
+    private Boolean validateFields() {
+        return ValidateUtil.isNotNullEditText(titleEditText,
+                getResources().getString(R.string.field_not_null))
+                &&
+                ValidateUtil.isNotNullEditText(dueDateEditText,
+                        getResources().getString(R.string.field_not_null));
     }
 
     private void showSureDialog() {
@@ -124,14 +134,14 @@ public class BusinessFragment extends Fragment {
 
         builder.setPositiveButton(getResources().getString(R.string.ok),
                 new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                addItem();
-            }
-        }).setNegativeButton(getResources().getString(R.string.cancel),
+                    public void onClick(DialogInterface dialog, int which) {
+                        addItem();
+                    }
+                }).setNegativeButton(getResources().getString(R.string.cancel),
                 new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        }).show();
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).show();
     }
 
     @Background

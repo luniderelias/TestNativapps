@@ -25,6 +25,7 @@ import nativapps.teste.micrm.model.Institution;
 import nativapps.teste.micrm.model.Person;
 import nativapps.teste.micrm.util.ActivityUtil;
 import nativapps.teste.micrm.util.DatabaseHelper;
+import nativapps.teste.micrm.util.ValidateUtil;
 
 @EFragment(R.layout.fragment_people)
 public class PeopleFragment extends Fragment {
@@ -51,7 +52,16 @@ public class PeopleFragment extends Fragment {
 
     @Click(R.id.addButton)
     void addClick() {
-        showSureDialog();
+        if (validateFields())
+            showSureDialog();
+    }
+
+    private Boolean validateFields() {
+        return ValidateUtil.isNotNullEditText(nameEditText,
+                getResources().getString(R.string.field_not_null))
+                &&
+                ValidateUtil.checkEmail(mailEditText,
+                        getResources().getString(R.string.invalid_email));
     }
 
     private void showSureDialog() {

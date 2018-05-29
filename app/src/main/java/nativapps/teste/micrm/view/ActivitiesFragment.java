@@ -29,6 +29,7 @@ import nativapps.teste.micrm.model.Institution;
 import nativapps.teste.micrm.model.Person;
 import nativapps.teste.micrm.util.ActivityUtil;
 import nativapps.teste.micrm.util.DatabaseHelper;
+import nativapps.teste.micrm.util.ValidateUtil;
 
 @EFragment(R.layout.fragment_activities)
 public class ActivitiesFragment extends Fragment {
@@ -124,8 +125,14 @@ public class ActivitiesFragment extends Fragment {
     }
 
     @Click(R.id.addButton)
-    void addClick(){
-        showSureDialog();
+    void addClick() {
+        if (validateFields())
+            showSureDialog();
+    }
+
+    private Boolean validateFields() {
+        return ValidateUtil.isNotNullEditText(descriptionEditText,
+                getResources().getString(R.string.field_not_null));
     }
 
     private void showSureDialog() {
@@ -145,7 +152,7 @@ public class ActivitiesFragment extends Fragment {
     }
 
     @Background
-    void addItem(){
+    void addItem() {
         try {
             activityDao.createOrUpdate(new Activity(
                     descriptionEditText.getText().toString(),
@@ -171,8 +178,8 @@ public class ActivitiesFragment extends Fragment {
     }
 
     @UiThread
-    void showToast(String saved){
-        ActivityUtil.showToast(getActivity(),saved);
+    void showToast(String saved) {
+        ActivityUtil.showToast(getActivity(), saved);
     }
 
 
