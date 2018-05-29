@@ -1,6 +1,8 @@
 package nativapps.teste.micrm.view;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,7 +50,23 @@ public class InstitutionFragment extends Fragment {
 
     @Click(R.id.addButton)
     void addClick() {
-        addItem();
+        showSureDialog();
+    }
+
+    private void showSureDialog() {
+        AlertDialog.Builder builder = ActivityUtil.callDialog(
+                getActivity(), R.string.add_organization, R.string.are_you_sure);
+
+        builder.setPositiveButton(getResources().getString(R.string.ok),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        addItem();
+                    }
+                }).setNegativeButton(getResources().getString(R.string.cancel),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).show();
     }
 
     @Background
@@ -60,10 +78,18 @@ public class InstitutionFragment extends Fragment {
                     phoneEditText.getText().toString()
             ));
             showToast(getResources().getString(R.string.organization_saved));
+
+            switchFragment();
         } catch (SQLException e) {
             e.printStackTrace();
             showToast(getResources().getString(R.string.save_failed));
         }
+    }
+
+    @UiThread
+    void switchFragment() {
+        ActivityUtil.switchFragment(new HomeFragment_(),
+                R.id.home_container, ((MainActivity_) getActivity()));
     }
 
     @UiThread
