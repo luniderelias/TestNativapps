@@ -14,6 +14,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import nativapps.teste.micrm.R;
 
 
@@ -28,6 +33,36 @@ public class ValidateUtil {
         return true;
     }
 
+    public static Boolean isValidTime(EditText editText, String errorMessage) {
+        try {
+            if (Integer.valueOf(editText.getText().toString().split(":")[0]) > 24) {
+                setError(editText, errorMessage);
+                return false;
+            } else {
+                if (Integer.valueOf(editText.getText().toString().split(":")[1]) > 59) {
+                    setError(editText, errorMessage);
+                    return false;
+                }
+            }
+        } catch (Exception e) {
+            setError(editText, errorMessage);
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static boolean isValidDate(EditText editText, String errorMessage) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat.setLenient(false);
+        try {
+            dateFormat.parse(editText.getText().toString().trim());
+        } catch (ParseException pe) {
+            setError(editText, errorMessage);
+            return false;
+        }
+        return true;
+    }
+
     public static Boolean isSpinnerItemSelected(Spinner spinner) {
         return spinner.getSelectedItem() != null;
     }
@@ -37,15 +72,17 @@ public class ValidateUtil {
             if (editText.getText().toString().split("@")[1].split("\\.").length > 1)
                 return true;
             else {
-                editText.requestFocus();
-                editText.setError(errorMessage);
+                setError(editText, errorMessage);
                 return false;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            editText.requestFocus();
-            editText.setError(errorMessage);
             return false;
         }
+    }
+
+    private static void setError(EditText editText, String errorMessage) {
+        editText.requestFocus();
+        editText.setError(errorMessage);
     }
 }

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.Paint;
 import android.os.Build;
 import android.support.v4.app.Fragment;
+import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.TextChange;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.ormlite.annotations.OrmLiteDao;
@@ -33,6 +35,7 @@ import nativapps.teste.micrm.model.Institution;
 import nativapps.teste.micrm.model.Person;
 import nativapps.teste.micrm.util.ActivityUtil;
 import nativapps.teste.micrm.util.DatabaseHelper;
+import nativapps.teste.micrm.util.MaskWatcher;
 import nativapps.teste.micrm.util.ValidateUtil;
 
 @EFragment(R.layout.fragment_business)
@@ -83,6 +86,7 @@ public class BusinessFragment extends Fragment {
         ((MainActivity_) getActivity())
                 .toolbar.setTitle(getResources().getString(R.string.add_business));
         getSpinnersData();
+        dueDateEditText.addTextChangedListener(new MaskWatcher("##/##/####"));
     }
 
     @Background
@@ -129,7 +133,10 @@ public class BusinessFragment extends Fragment {
                 getResources().getString(R.string.field_not_null))
                 &&
                 ValidateUtil.isNotNullEditText(dueDateEditText,
-                        getResources().getString(R.string.field_not_null));
+                        getResources().getString(R.string.field_not_null))
+                &&
+                ValidateUtil.isValidDate(dueDateEditText,
+                        getResources().getString(R.string.invalid_date));
     }
 
     private void showSureDialog() {
@@ -166,6 +173,29 @@ public class BusinessFragment extends Fragment {
             showToast(getResources().getString(R.string.save_failed));
         }
     }
+
+    @Click(R.id.addOrganizationImageView)
+    void checkOrganizationSpinner() {
+        ActivityUtil.callDialog(getActivity(), R.string.add_organization, R.string.want_to_create)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ((MainActivity_) getActivity()).switchFragment("InstitutionFragment");
+                    }
+                }).show();
+    }
+
+    @Click(R.id.addPeopleImageView)
+    void checkPersonSpinner() {
+        ActivityUtil.callDialog(getActivity(), R.string.add_person, R.string.want_to_create)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ((MainActivity_) getActivity()).switchFragment("PeopleFragment");
+                    }
+                }).show();
+    }
+
 
     @UiThread
     void switchFragment() {

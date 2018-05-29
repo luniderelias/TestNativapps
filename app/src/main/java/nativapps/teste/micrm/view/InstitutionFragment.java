@@ -48,9 +48,9 @@ public class InstitutionFragment extends Fragment {
     @AfterViews
     void AfterViews() {
         ((MainActivity_) getActivity())
-                .navigationView.setCheckedItem(R.id.nav_business);
+                .navigationView.setCheckedItem(R.id.nav_institution);
         ((MainActivity_) getActivity())
-                .toolbar.setTitle(getResources().getString(R.string.add_business));
+                .toolbar.setTitle(getResources().getString(R.string.add_organization));
     }
 
     @Click(R.id.addButton)

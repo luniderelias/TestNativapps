@@ -37,6 +37,8 @@
     <string name="cancel">Cancelar</string>
     <string name="field_not_null">El campo no puede estar vacío</string>
     <string name="invalid_email">Email Inválido</string>
+    <string name="invalid_time">Tiempo Inválido</string>
+    <string name="invalid_date">Fecha Invalida</string>
     <string name="want_to_create">¿Quieres agregar un elemento?</string>
     <string name="are_you_sure">¿Estás seguro de realizar esta acción?</string>
 
