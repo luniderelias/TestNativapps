@@ -138,6 +138,8 @@ public class ActivitiesFragment extends Fragment {
     void addClick() {
         if (validateFields())
             showSureDialog();
+        else
+            showToast(getResources().getString(R.string.save_failed));
     }
 
     private Boolean validateFields() {

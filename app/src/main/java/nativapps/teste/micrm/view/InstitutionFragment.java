@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import com.j256.ormlite.dao.Dao;
 
+import net.rimoto.intlphoneinput.IntlPhoneInput;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
@@ -37,7 +39,7 @@ public class InstitutionFragment extends Fragment {
     EditText addressEditText;
 
     @ViewById(R.id.phoneEditText)
-    EditText phoneEditText;
+    IntlPhoneInput phoneEditText;
 
     @ViewById(R.id.addButton)
     Button addButton;
@@ -55,11 +57,16 @@ public class InstitutionFragment extends Fragment {
 
     @Click(R.id.addButton)
     void addClick() {
-        if(validateFields())
-            showSureDialog();
+        if (validateFields()) {
+            if (ValidateUtil.checkPhone(phoneEditText))
+                showSureDialog();
+            else
+                showToast(getResources().getString(R.string.invalid_phone));
+        } else
+            showToast(getResources().getString(R.string.save_failed));
     }
 
-    private Boolean validateFields(){
+    private Boolean validateFields() {
         return ValidateUtil.isNotNullEditText(nameEditText,
                 getResources().getString(R.string.field_not_null));
     }
@@ -86,7 +93,7 @@ public class InstitutionFragment extends Fragment {
             institutionDao.createOrUpdate(new Institution(
                     nameEditText.getText().toString(),
                     addressEditText.getText().toString(),
-                    phoneEditText.getText().toString()
+                    phoneEditText.getText()
             ));
             showToast(getResources().getString(R.string.organization_saved));
 

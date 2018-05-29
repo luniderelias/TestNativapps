@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 import com.j256.ormlite.dao.Dao;
 
+import net.rimoto.intlphoneinput.IntlPhoneInput;
+
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
@@ -34,7 +36,7 @@ public class PeopleFragment extends Fragment {
     EditText nameEditText;
 
     @ViewById(R.id.phoneEditText)
-    EditText phoneEditText;
+    IntlPhoneInput phoneEditText;
 
     @ViewById(R.id.mailEditText)
     EditText mailEditText;
@@ -56,8 +58,13 @@ public class PeopleFragment extends Fragment {
 
     @Click(R.id.addButton)
     void addClick() {
-        if (validateFields())
-            showSureDialog();
+        if (validateFields()) {
+            if (ValidateUtil.checkPhone(phoneEditText))
+                showSureDialog();
+            else
+                showToast(getResources().getString(R.string.invalid_phone));
+        } else
+            showToast(getResources().getString(R.string.save_failed));
     }
 
     private Boolean validateFields() {

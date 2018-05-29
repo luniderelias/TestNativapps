@@ -41,6 +41,7 @@
     <string name="invalid_date">Invalid Date</string>
     <string name="want_to_create">Do you want to add item?</string>
     <string name="are_you_sure">Are you sure about performing this action?</string>
+    <string name="invalid_phone">Invalid Phone</string>
 
     <string name="save_failed">Save failed</string>
 </resources>
