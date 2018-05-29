@@ -47,6 +47,10 @@ public class PeopleFragment extends Fragment {
 
     @AfterViews
     void afterViews() {
+        ((MainActivity_) getActivity())
+                .navigationView.setCheckedItem(R.id.nav_people);
+        ((MainActivity_) getActivity())
+                .toolbar.setTitle(getResources().getString(R.string.add_person));
 
     }
 

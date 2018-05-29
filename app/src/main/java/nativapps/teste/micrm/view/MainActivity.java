@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private void switchFragment(String fragment) {
+    public void switchFragment(String fragment) {
         switch (fragment) {
             case "ActivitiesFragment":
                 ActivityUtil.switchFragment(

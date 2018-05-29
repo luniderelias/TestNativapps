@@ -40,7 +40,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Institution.class);
             TableUtils.createTable(connectionSource, Person.class);
 
-            populateDatabase();
+            //populateDatabase();
         } catch (Exception e) {
             e.printStackTrace();
         }

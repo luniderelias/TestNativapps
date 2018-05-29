@@ -14,6 +14,8 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ItemClick;
+import org.androidannotations.annotations.ItemSelect;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.ormlite.annotations.OrmLiteDao;
@@ -79,6 +81,10 @@ public class ActivitiesFragment extends Fragment {
 
     @AfterViews
     void afterViews() {
+        ((MainActivity_) getActivity())
+                .navigationView.setCheckedItem(R.id.nav_activities);
+        ((MainActivity_) getActivity())
+                .toolbar.setTitle(getResources().getString(R.string.add_activity));
         getSpinnersData();
     }
 
@@ -110,6 +116,39 @@ public class ActivitiesFragment extends Fragment {
         businessAdapter = new ArrayAdapter<>(
                 getActivity(), R.layout.spinner_item, businesses);
         businessAdapter.setDropDownViewResource(R.layout.spinner_dropdown);
+    }
+
+    @Click(R.id.addOrganizationImageView)
+    void checkOrganizationSpinner() {
+        ActivityUtil.callDialog(getActivity(), R.string.add_organization, R.string.want_to_create)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ((MainActivity_) getActivity()).switchFragment("InstitutionFragment");
+                    }
+                }).show();
+    }
+
+    @Click(R.id.addBusinessImageView)
+    void checkBusinessSpinner() {
+        ActivityUtil.callDialog(getActivity(), R.string.add_business, R.string.want_to_create)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ((MainActivity_) getActivity()).switchFragment("BusinessFragment");
+                    }
+                }).show();
+    }
+
+    @Click(R.id.addPeopleImageView)
+    void checkPersonSpinner() {
+        ActivityUtil.callDialog(getActivity(), R.string.add_person, R.string.want_to_create)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ((MainActivity_) getActivity()).switchFragment("PeopleFragment");
+                    }
+                }).show();
     }
 
     @UiThread

@@ -78,6 +78,10 @@ public class BusinessFragment extends Fragment {
 
     @AfterViews
     void afterViews() {
+        ((MainActivity_) getActivity())
+                .navigationView.setCheckedItem(R.id.nav_business);
+        ((MainActivity_) getActivity())
+                .toolbar.setTitle(getResources().getString(R.string.add_business));
         getSpinnersData();
     }
 
