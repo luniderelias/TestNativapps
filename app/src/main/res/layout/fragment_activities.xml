@@ -38,7 +38,9 @@
                 android:layout_width="match_parent"
                 android:textColorHighlight="@color/colorPrimaryDark"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:singleLine="true"
+                android:nextFocusDown="@id/typeEditText"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -51,7 +53,9 @@
                 android:id="@+id/typeEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:singleLine="true"
+                android:nextFocusDown="@id/organizationSpinner" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -65,7 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:layout_marginBottom="@dimen/fab_margin"/>
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:nextFocusDown="@id/personSpinner"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -79,7 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:layout_marginBottom="@dimen/fab_margin"/>
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:nextFocusDown="@id/businessSpinner"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -93,7 +99,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:layout_marginBottom="@dimen/fab_margin" />
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:nextFocusDown="@id/dateEditText" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -107,7 +114,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:inputType="date"/>
+                android:inputType="date"
+                android:singleLine="true"
+                android:nextFocusDown="@id/timeEditText" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -121,7 +130,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:inputType="time"/>
+                android:inputType="time"
+                android:singleLine="true"
+                android:nextFocusDown="@id/addButton"/>
 
         </LinearLayout>
     </ScrollView>

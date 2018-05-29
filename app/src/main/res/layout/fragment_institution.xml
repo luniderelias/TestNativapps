@@ -38,7 +38,9 @@
                 android:id="@+id/nameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:singleLine="true"
+                android:nextFocusDown="@id/addressEditText"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -51,7 +53,9 @@
                 android:id="@+id/addressEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:singleLine="true"
+                android:nextFocusDown="@id/phoneEditText"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -65,7 +69,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:inputType="phone"/>
+                android:inputType="phone"
+                android:singleLine="true"
+                android:nextFocusDown="@id/addButton"/>
 
         </LinearLayout>
     </ScrollView>
