@@ -1,11 +1,11 @@
 package nativapps.teste.micrm.util;
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -65,6 +65,18 @@ public class ActivityUtil {
             progress.show();
         }
         return progress;
+    }
+
+    public static android.app.AlertDialog.Builder callDialog(Context context, int titleResId, int messageResId){
+        android.app.AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new android.app.AlertDialog.Builder(context, android.R.style.Theme_Material_Light_Dialog_Alert);
+        } else {
+            builder = new android.app.AlertDialog.Builder(context);
+        }
+        builder.setTitle(context.getString(titleResId))
+                .setMessage(context.getString(messageResId));
+        return builder;
     }
 
     public static void closeProgressDialog(ProgressDialog progress) {

@@ -34,5 +34,13 @@
     <string name="person_saved">Person saved successfully</string>
     <string name="organization_saved">Organization saved successfully</string>
 
+    <string name="cancel">Cancel</string>
+    <string name="field_not_null">Field cannot be empty</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="invalid_time">Invalid Time</string>
+    <string name="invalid_date">Invalid Date</string>
+    <string name="want_to_create">Do you want to add item?</string>
+    <string name="are_you_sure">Are you sure about performing this action?</string>
+
     <string name="save_failed">Save failed</string>
 </resources>

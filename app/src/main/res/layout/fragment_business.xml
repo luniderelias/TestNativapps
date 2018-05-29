@@ -38,6 +38,8 @@
                 android:id="@+id/titleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nextFocusDown="@id/descriptionEditText"
+                android:singleLine="true"
                 android:textColor="@color/white" />
 
             <TextView
@@ -51,35 +53,69 @@
                 android:id="@+id/descriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"/>
+                android:nextFocusDown="@id/organizationSpinner"
+                android:singleLine="true"
+                android:textColor="@color/white" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/organization"
-                android:textColor="@color/white"
-                android:textSize="@dimen/title_size" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:text="@string/organization"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/title_size" />
+
+                <ImageView
+                    android:id="@+id/addOrganizationImageView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.2"
+                    app:srcCompat="@drawable/icon_add" />
+            </LinearLayout>
 
             <Spinner
                 android:id="@+id/organizationSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_marginBottom="@dimen/fab_margin"/>
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:nextFocusDown="@id/personSpinner"
+                android:textColor="@color/white" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/person"
-                android:textColor="@color/white"
-                android:textSize="@dimen/title_size" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:text="@string/person"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/title_size" />
+
+                <ImageView
+                    android:id="@+id/addPeopleImageView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.2"
+                    app:srcCompat="@drawable/icon_add" />
+            </LinearLayout>
 
             <Spinner
                 android:id="@+id/personSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_marginBottom="@dimen/fab_margin"/>
+                android:layout_marginBottom="@dimen/fab_margin"
+                android:nextFocusDown="@id/valueEditText"
+                android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -92,7 +128,9 @@
                 android:id="@+id/valueEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"/>
+                android:nextFocusDown="@id/dueDateEditText"
+                android:singleLine="true"
+                android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -105,8 +143,11 @@
                 android:id="@+id/dueDateEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:inputType="date"/>
+                android:inputType="date"
+                android:maxLength="10"
+                android:nextFocusDown="@id/stateEditText"
+                android:singleLine="true"
+                android:textColor="@color/white" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -119,7 +160,9 @@
                 android:id="@+id/stateEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"/>
+                android:nextFocusDown="@id/addButton"
+                android:singleLine="true"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 
